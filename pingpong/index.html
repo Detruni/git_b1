@@ -4,49 +4,100 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mini-jeu Ping Pong</title>
-    <link rel="stylesheet" href="../styles.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Manrope', 'ui-sans-serif', 'system-ui']
+                    },
+                    colors: {
+                        primary: '#2563eb',
+                        primaryDark: '#1d4ed8',
+                        accent: '#10b981',
+                        neutral: '#1f2937',
+                        neutralSoft: '#f8fafc'
+                    },
+                    boxShadow: {
+                        glow: '0 24px 40px -24px rgba(37, 99, 235, 0.45)',
+                        card: '0 18px 28px -20px rgba(15, 23, 42, 0.3)'
+                    },
+                    borderRadius: {
+                        hero: '32px',
+                        panel: '18px'
+                    },
+                    backgroundImage: {
+                        softGradient: 'radial-gradient(circle at 20% 20%, rgba(37,99,235,0.12), transparent 55%), radial-gradient(circle at 80% 0%, rgba(16,185,129,0.12), transparent 55%)'
+                    }
+                }
+            }
+        };
+    </script>
 </head>
-<body>
-    <header class="game-topbar">
-        <nav class="top-nav">
-            <a class="logo" href="../index.html">Atelier Git</a>
-            <ul class="nav-links">
-                <li><a href="../index.html#intro">Découvrir</a></li>
-                <li><a href="../index.html#concepts">Concepts</a></li>
-                <li><a href="../index.html#workflow">Workflow</a></li>
-                <li><a href="../index.html#ressources">Ressources</a></li>
-                <li><a href="../commandes.html">Commandes</a></li>
-                <li><a class="active" href="index.html">Ping Pong</a></li>
+<body class="min-h-screen bg-neutralSoft font-sans text-neutral bg-softGradient">
+    <header class="bg-white shadow-sm">
+        <nav class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-6 px-6 py-6 md:px-10">
+            <a class="text-lg font-semibold tracking-wide text-neutral" href="../index.html">Atelier Git</a>
+            <ul class="flex flex-1 items-center justify-end gap-6 text-sm font-semibold text-neutral/70 md:text-base">
+                <li><a class="border-b-2 border-transparent pb-1 transition hover:border-primary hover:text-primary" href="../index.html#intro">Découvrir</a></li>
+                <li><a class="border-b-2 border-transparent pb-1 transition hover:border-primary hover:text-primary" href="../index.html#concepts">Concepts</a></li>
+                <li><a class="border-b-2 border-transparent pb-1 transition hover:border-primary hover:text-primary" href="../index.html#workflow">Workflow</a></li>
+                <li><a class="border-b-2 border-transparent pb-1 transition hover:border-primary hover:text-primary" href="../index.html#ressources">Ressources</a></li>
+                <li><a class="border-b-2 border-transparent pb-1 transition hover:border-primary hover:text-primary" href="../commandes.html">Commandes</a></li>
+                <li><a class="border-b-2 border-primary pb-1 text-primary" href="index.html">Ping Pong</a></li>
             </ul>
         </nav>
     </header>
-    <main class="game-wrapper">
-        <header class="game-header">
-            <h1>Ping Pong</h1>
-            <p>Contrôlez la raquette gauche avec les touches <strong>Z</strong> et <strong>S</strong>. La raquette droite est gérée automatiquement.</p>
+
+    <main class="mx-auto flex max-w-5xl flex-col gap-10 px-6 py-12 md:px-10 md:py-16">
+        <header class="rounded-panel border border-neutral/10 bg-white p-6 text-center shadow-card md:text-left">
+            <h1 class="text-3xl font-semibold text-neutral md:text-4xl">Ping Pong</h1>
+            <p class="mt-3 text-sm text-neutral/70 md:text-base">Contrôlez la raquette gauche avec <strong>Z</strong>/<strong>W</strong> et <strong>S</strong>. Choisissez de jouer contre le bot ou de piloter la raquette droite avec <strong>↑</strong>/<strong>↓</strong>.</p>
         </header>
-        <section class="game-area">
-            <canvas id="pong" width="780" height="480" aria-label="Table de ping pong"></canvas>
-            <div class="quiz-overlay" id="quizOverlay" aria-hidden="true">
-                <div class="quiz-card" role="dialog" aria-modal="true" aria-labelledby="quizHeading">
-                    <h2 id="quizHeading">Question Git</h2>
-                    <p id="quizQuestion" class="quiz-question"></p>
-                    <div id="quizOptions" class="quiz-options" role="group" aria-label="Choix de réponses"></div>
-                    <p id="quizFeedback" class="quiz-feedback" aria-live="polite"></p>
-                    <button id="quizContinue" class="quiz-continue" type="button" hidden>Continuer la partie</button>
+
+        <section class="grid gap-6">
+            <div class="relative flex flex-col items-center justify-center">
+                <canvas id="pong" width="780" height="480" aria-label="Table de ping pong" class="w-full max-w-3xl rounded-panel border border-neutral/10 bg-white shadow-glow"></canvas>
+                <div id="quizOverlay" class="absolute inset-0 hidden items-center justify-center bg-white/80 px-4 backdrop-blur transition duration-200" aria-hidden="true">
+                    <div class="w-full max-w-lg rounded-panel border border-neutral/10 bg-white p-6 text-left shadow-card" role="dialog" aria-modal="true" aria-labelledby="quizHeading">
+                        <h2 id="quizHeading" class="text-2xl font-semibold text-primary">Question Git</h2>
+                        <p id="quizQuestion" class="mt-4 text-base text-neutral"></p>
+                        <div id="quizOptions" class="mt-4 grid gap-3" role="group" aria-label="Choix de réponses"></div>
+                        <p id="quizFeedback" class="mt-4 min-h-[1.5rem] text-sm font-semibold text-neutral/80" aria-live="polite"></p>
+                        <button id="quizContinue" class="mt-6 inline-flex items-center justify-center rounded-full bg-primary px-6 py-2 font-semibold text-white shadow-md transition hover:-translate-y-0.5 hover:bg-primaryDark" type="button" hidden>Continuer la partie</button>
+                    </div>
                 </div>
             </div>
-            <div class="controls">
-                <button id="startButton" type="button">Lancer / Reprendre</button>
-                <button id="resetButton" type="button">Réinitialiser</button>
-                <a class="back-link" href="../index.html">Retour à l'accueil</a>
+            <div class="flex flex-wrap items-center justify-center gap-4 text-sm md:justify-between md:text-base">
+                <div class="flex flex-wrap items-center justify-center gap-3">
+                    <button id="startButton" type="button" class="inline-flex items-center justify-center rounded-full bg-primary px-5 py-2 font-semibold text-white shadow-md transition hover:-translate-y-0.5 hover:bg-primaryDark">Lancer / Reprendre</button>
+                    <button id="resetButton" type="button" class="inline-flex items-center justify-center rounded-full border border-primary px-5 py-2 font-semibold text-primary transition hover:bg-primary/5">Réinitialiser</button>
+                </div>
+                <fieldset class="flex flex-wrap items-center gap-3 rounded-full border border-neutral/20 bg-white px-4 py-2 text-neutral/80">
+                    <legend class="sr-only">Mode de jeu</legend>
+                    <label for="modeCpu" class="flex items-center gap-2">
+                        <input id="modeCpu" name="gameMode" type="radio" value="cpu" class="h-4 w-4 rounded-full border-neutral/40 bg-white text-primary focus:ring-primary" checked>
+                        Contre le bot
+                    </label>
+                    <span aria-hidden="true" class="hidden h-4 w-px bg-neutral/20 sm:block"></span>
+                    <label for="modePvp" class="flex items-center gap-2">
+                        <input id="modePvp" name="gameMode" type="radio" value="pvp" class="h-4 w-4 rounded-full border-neutral/40 bg-white text-primary focus:ring-primary">
+                        À deux joueurs
+                    </label>
+                </fieldset>
+                <a class="inline-flex items-center justify-center rounded-full border border-neutral/20 px-5 py-2 font-semibold text-neutral transition hover:bg-white" href="../index.html">Retour à l'accueil</a>
             </div>
         </section>
-        <footer class="game-footer">
-            <p>Marquez 5 points pour gagner. Bonne partie !</p>
+
+        <footer class="rounded-panel border border-neutral/10 bg-white p-4 text-center text-sm text-neutral/70 shadow-card">
+            Marquez 5 points pour gagner. Bonne partie&nbsp;!
         </footer>
     </main>
+
     <script src="game.js"></script>
 </body>
 </html>

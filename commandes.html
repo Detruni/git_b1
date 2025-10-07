@@ -1,227 +1,253 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <!-- Métadonnées et ressources partagées avec la page d'accueil -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Atelier Git — Commandes essentielles</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Manrope', 'ui-sans-serif', 'system-ui']
+                    },
+                    colors: {
+                        primary: '#2563eb',
+                        primaryDark: '#1d4ed8',
+                        accent: '#64748b',
+                        neutral: '#1f2937',
+                        neutralSoft: '#f8fafc',
+                        neutralMuted: '#e2e8f0'
+                    },
+                    boxShadow: {
+                        glow: '0 18px 32px -20px rgba(37, 99, 235, 0.35)',
+                        card: '0 16px 30px -22px rgba(15, 23, 42, 0.22)'
+                    },
+                    borderRadius: {
+                        hero: '28px',
+                        panel: '16px'
+                    },
+                    backgroundImage: {
+                        softGradient: 'radial-gradient(circle at 12% 18%, rgba(37,99,235,0.12), transparent 55%), radial-gradient(circle at 86% 0%, rgba(100,116,139,0.12), transparent 55%)',
+                        hero: 'linear-gradient(135deg, rgba(248,250,252,0.98) 0%, rgba(236,240,245,0.98) 100%)'
+                    }
+                }
+            }
+        };
+    </script>
 </head>
-<body>
-    <!-- Bandeau d'introduction dédié à la fiche de commandes -->
-    <header class="page-hero">
-        <nav class="top-nav">
-            <a class="logo" href="index.html">Atelier Git</a>
-            <ul class="nav-links">
-                <li><a href="index.html#intro">Découvrir</a></li>
-                <li><a href="index.html#concepts">Concepts</a></li>
-                <li><a href="index.html#workflow">Workflow</a></li>
-                <li><a href="index.html#ressources">Ressources</a></li>
-                <li><a class="active" href="commandes.html">Commandes</a></li>
+<body class="min-h-screen bg-neutralSoft font-sans text-neutral bg-softGradient">
+    <header class="rounded-b-hero bg-hero shadow-glow">
+        <nav class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-6 px-6 py-6 md:px-10">
+            <a class="text-lg font-semibold tracking-wide text-neutral" href="index.html">Atelier Git</a>
+            <ul class="flex flex-1 items-center justify-end gap-6 text-sm font-semibold text-neutral/70 md:text-base">
+                <li><a class="border-b-2 border-transparent pb-1 transition hover:border-primary hover:text-primary" href="index.html#intro">Découvrir</a></li>
+                <li><a class="border-b-2 border-transparent pb-1 transition hover:border-primary hover:text-primary" href="index.html#concepts">Concepts</a></li>
+                <li><a class="border-b-2 border-transparent pb-1 transition hover:border-primary hover:text-primary" href="index.html#workflow">Workflow</a></li>
+                <li><a class="border-b-2 border-transparent pb-1 transition hover:border-primary hover:text-primary" href="index.html#ressources">Ressources</a></li>
+                <li><a class="border-b-2 border-primary pb-1 text-primary" href="commandes.html">Commandes</a></li>
             </ul>
         </nav>
-        <div class="page-title">
-            <span class="badge">Référence rapide</span>
-            <h1>Commandes Git indispensables</h1>
-            <p>Un mémo interactif pour gagner du temps, structurer vos commits et collaborer efficacement.</p>
+        <div class="mx-auto flex max-w-3xl flex-col items-center gap-6 px-6 pb-16 text-center md:px-10">
+            <span class="inline-flex items-center gap-2 rounded-full bg-white px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-primary">Référence rapide</span>
+            <h1 class="text-4xl font-bold leading-tight text-neutral md:text-5xl">Commandes Git indispensables</h1>
+            <p class="max-w-2xl text-lg text-neutral/70 md:text-xl">Un mémo clair pour gagner du temps, structurer vos commits et collaborer efficacement.</p>
         </div>
     </header>
 
-    <!-- Contenu principal : repères et catalogue des commandes -->
-    <main class="content">
-        <!-- Mise en contexte avec premières commandes de base -->
-        <section class="section command-intro">
-            <div class="intro-grid">
-                <article>
-                    <h3>Configurer l'environnement</h3>
-                    <p>Avant toute chose, définissez votre identité et vérifiez la version installée.</p>
-                    <code>git config --global user.name "Votre Nom"</code>
-                    <code>git --version</code>
-                </article>
-                <article>
-                    <h3>Se repérer</h3>
-                    <p>Inspectez l'état du dépôt et parcourez rapidement l'historique pour comprendre le contexte.</p>
-                    <code>git status</code>
-                    <code>git log --oneline --graph</code>
-                </article>
-                <article>
-                    <h3>Synchroniser</h3>
-                    <p>Gardez votre travail à jour avec la branche principale avant de démarrer une nouvelle tâche.</p>
-                    <code>git fetch origin</code>
-                    <code>git pull --rebase</code>
-                </article>
+    <main class="mx-auto flex max-w-6xl flex-col gap-20 px-6 py-16 md:px-10 md:py-20">
+        <section class="grid gap-6 md:grid-cols-3">
+            <article class="rounded-panel border border-neutral/10 bg-white p-6 shadow-card">
+                <h3 class="text-xl font-semibold text-neutral">Configurer l'environnement</h3>
+                <p class="mt-3 text-neutral/70">Avant toute chose, définissez votre identité et vérifiez la version installée.</p>
+                <code class="mt-4 block rounded-md border border-neutral/10 bg-neutralSoft px-3 py-2 font-mono text-sm text-neutral">git config --global user.name "Votre Nom"</code>
+                <code class="mt-3 block rounded-md border border-neutral/10 bg-neutralSoft px-3 py-2 font-mono text-sm text-neutral">git --version</code>
+            </article>
+            <article class="rounded-panel border border-neutral/10 bg-white p-6 shadow-card">
+                <h3 class="text-xl font-semibold text-neutral">Se repérer</h3>
+                <p class="mt-3 text-neutral/70">Inspectez l'état du dépôt et parcourez rapidement l'historique pour comprendre le contexte.</p>
+                <code class="mt-4 block rounded-md border border-neutral/10 bg-neutralSoft px-3 py-2 font-mono text-sm text-neutral">git status</code>
+                <code class="mt-3 block rounded-md border border-neutral/10 bg-neutralSoft px-3 py-2 font-mono text-sm text-neutral">git log --oneline --graph</code>
+            </article>
+            <article class="rounded-panel border border-neutral/10 bg-white p-6 shadow-card">
+                <h3 class="text-xl font-semibold text-neutral">Synchroniser</h3>
+                <p class="mt-3 text-neutral/70">Gardez votre travail à jour avec la branche principale avant de démarrer une nouvelle tâche.</p>
+                <code class="mt-4 block rounded-md border border-neutral/10 bg-neutralSoft px-3 py-2 font-mono text-sm text-neutral">git fetch origin</code>
+                <code class="mt-3 block rounded-md border border-neutral/10 bg-neutralSoft px-3 py-2 font-mono text-sm text-neutral">git pull --rebase</code>
+            </article>
+        </section>
+
+        <section class="space-y-6">
+            <div class="mx-auto max-w-3xl space-y-3 text-center md:text-left">
+                <h2 class="text-3xl font-semibold text-neutral">Catalogue par situations</h2>
+                <p class="text-lg text-neutral/70">Dépliez une section pour découvrir les commandes adaptées à chaque moment du workflow.</p>
+            </div>
+            <div class="space-y-4">
+                <details class="group rounded-panel border border-neutral/10 bg-white p-5 shadow-card" open>
+                    <summary class="flex cursor-pointer items-center justify-between text-lg font-semibold text-neutral transition group-open:text-primary">Démarrer un projet</summary>
+                    <div class="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                        <article class="rounded-panel border border-neutral/10 bg-neutralSoft p-5 shadow-sm">
+                            <h3 class="text-lg font-semibold text-neutral">Initialiser</h3>
+                            <code class="mt-3 block rounded-md border border-neutral/10 bg-white px-3 py-2 font-mono text-sm text-neutral">git init</code>
+                            <p class="mt-3 text-neutral/70">Crée un nouveau dépôt Git vide dans le dossier courant.</p>
+                        </article>
+                        <article class="rounded-panel border border-neutral/10 bg-neutralSoft p-5 shadow-sm">
+                            <h3 class="text-lg font-semibold text-neutral">Cloner</h3>
+                            <code class="mt-3 block rounded-md border border-neutral/10 bg-white px-3 py-2 font-mono text-sm text-neutral">git clone &lt;url&gt;</code>
+                            <p class="mt-3 text-neutral/70">Télécharge un dépôt existant et configure l'origine distante.</p>
+                        </article>
+                        <article class="rounded-panel border border-neutral/10 bg-neutralSoft p-5 shadow-sm">
+                            <h3 class="text-lg font-semibold text-neutral">Ajouter un distant</h3>
+                            <code class="mt-3 block rounded-md border border-neutral/10 bg-white px-3 py-2 font-mono text-sm text-neutral">git remote add origin &lt;url&gt;</code>
+                            <p class="mt-3 text-neutral/70">Associe votre dépôt local à un dépôt distant (GitHub, GitLab...).</p>
+                        </article>
+                    </div>
+                </details>
+
+                <details class="group rounded-panel border border-neutral/10 bg-white p-5 shadow-card">
+                    <summary class="flex cursor-pointer items-center justify-between text-lg font-semibold text-neutral transition group-open:text-primary">Construire des commits utiles</summary>
+                    <div class="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                        <article class="rounded-panel border border-neutral/10 bg-neutralSoft p-5 shadow-sm">
+                            <h3 class="text-lg font-semibold text-neutral">Préparer</h3>
+                            <code class="mt-3 block rounded-md border border-neutral/10 bg-white px-3 py-2 font-mono text-sm text-neutral">git add &lt;fichier&gt;</code>
+                            <p class="mt-3 text-neutral/70">Place les modifications dans l'index avant de les enregistrer.</p>
+                        </article>
+                        <article class="rounded-panel border border-neutral/10 bg-neutralSoft p-5 shadow-sm">
+                            <h3 class="text-lg font-semibold text-neutral">Valider</h3>
+                            <code class="mt-3 block rounded-md border border-neutral/10 bg-white px-3 py-2 font-mono text-sm text-neutral">git commit -m "message"</code>
+                            <p class="mt-3 text-neutral/70">Enregistre les changements dans l'historique avec un message clair.</p>
+                        </article>
+                        <article class="rounded-panel border border-neutral/10 bg-neutralSoft p-5 shadow-sm">
+                            <h3 class="text-lg font-semibold text-neutral">Corriger</h3>
+                            <code class="mt-3 block rounded-md border border-neutral/10 bg-white px-3 py-2 font-mono text-sm text-neutral">git commit --amend</code>
+                            <p class="mt-3 text-neutral/70">Modifie le dernier commit (contenu et/ou message). À utiliser avant de partager.</p>
+                        </article>
+                    </div>
+                </details>
+
+                <details class="group rounded-panel border border-neutral/10 bg-white p-5 shadow-card">
+                    <summary class="flex cursor-pointer items-center justify-between text-lg font-semibold text-neutral transition group-open:text-primary">Explorer l'historique</summary>
+                    <div class="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                        <article class="rounded-panel border border-neutral/10 bg-neutralSoft p-5 shadow-sm">
+                            <h3 class="text-lg font-semibold text-neutral">Visualiser</h3>
+                            <code class="mt-3 block rounded-md border border-neutral/10 bg-white px-3 py-2 font-mono text-sm text-neutral">git log --oneline --graph</code>
+                            <p class="mt-3 text-neutral/70">Affiche un aperçu synthétique de l'historique et des branches.</p>
+                        </article>
+                        <article class="rounded-panel border border-neutral/10 bg-neutralSoft p-5 shadow-sm">
+                            <h3 class="text-lg font-semibold text-neutral">Comparer</h3>
+                            <code class="mt-3 block rounded-md border border-neutral/10 bg-white px-3 py-2 font-mono text-sm text-neutral">git diff HEAD~1</code>
+                            <p class="mt-3 text-neutral/70">Compare le dernier commit avec son parent (ou deux références).</p>
+                        </article>
+                        <article class="rounded-panel border border-neutral/10 bg-neutralSoft p-5 shadow-sm">
+                            <h3 class="text-lg font-semibold text-neutral">Annoter</h3>
+                            <code class="mt-3 block rounded-md border border-neutral/10 bg-white px-3 py-2 font-mono text-sm text-neutral">git blame fichier.js</code>
+                            <p class="mt-3 text-neutral/70">Identifie le commit et l'auteur à l'origine de chaque ligne d'un fichier.</p>
+                        </article>
+                    </div>
+                </details>
+
+                <details class="group rounded-panel border border-neutral/10 bg-white p-5 shadow-card">
+                    <summary class="flex cursor-pointer items-center justify-between text-lg font-semibold text-neutral transition group-open:text-primary">Travailler avec les branches</summary>
+                    <div class="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                        <article class="rounded-panel border border-neutral/10 bg-neutralSoft p-5 shadow-sm">
+                            <h3 class="text-lg font-semibold text-neutral">Créer</h3>
+                            <code class="mt-3 block rounded-md border border-neutral/10 bg-white px-3 py-2 font-mono text-sm text-neutral">git switch -c feature/api</code>
+                            <p class="mt-3 text-neutral/70">Crée une nouvelle branche et s'y positionne immédiatement.</p>
+                        </article>
+                        <article class="rounded-panel border border-neutral/10 bg-neutralSoft p-5 shadow-sm">
+                            <h3 class="text-lg font-semibold text-neutral">Fusionner</h3>
+                            <code class="mt-3 block rounded-md border border-neutral/10 bg-white px-3 py-2 font-mono text-sm text-neutral">git merge feature/api</code>
+                            <p class="mt-3 text-neutral/70">Intègre les commits de la branche cible dans la branche courante.</p>
+                        </article>
+                        <article class="rounded-panel border border-neutral/10 bg-neutralSoft p-5 shadow-sm">
+                            <h3 class="text-lg font-semibold text-neutral">Réécrire proprement</h3>
+                            <code class="mt-3 block rounded-md border border-neutral/10 bg-white px-3 py-2 font-mono text-sm text-neutral">git rebase main</code>
+                            <p class="mt-3 text-neutral/70">Rejoue vos commits par-dessus la branche principale pour un historique linéaire.</p>
+                        </article>
+                    </div>
+                </details>
+
+                <details class="group rounded-panel border border-neutral/10 bg-white p-5 shadow-card">
+                    <summary class="flex cursor-pointer items-center justify-between text-lg font-semibold text-neutral transition group-open:text-primary">Collaborer avec l'équipe</summary>
+                    <div class="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+                        <article class="rounded-panel border border-neutral/10 bg-neutralSoft p-5 shadow-sm">
+                            <h3 class="text-lg font-semibold text-neutral">Publier</h3>
+                            <code class="mt-3 block rounded-md border border-neutral/10 bg-white px-3 py-2 font-mono text-sm text-neutral">git push -u origin feature/ui</code>
+                            <p class="mt-3 text-neutral/70">Envoie vos commits et définit la branche distante par défaut.</p>
+                        </article>
+                        <article class="rounded-panel border border-neutral/10 bg-neutralSoft p-5 shadow-sm">
+                            <h3 class="text-lg font-semibold text-neutral">Mettre à jour</h3>
+                            <code class="mt-3 block rounded-md border border-neutral/10 bg-white px-3 py-2 font-mono text-sm text-neutral">git pull --rebase</code>
+                            <p class="mt-3 text-neutral/70">Récupère les nouveautés distantes et réapplique vos commits par-dessus.</p>
+                        </article>
+                        <article class="rounded-panel border border-neutral/10 bg-neutralSoft p-5 shadow-sm">
+                            <h3 class="text-lg font-semibold text-neutral">Suivre une branche distante</h3>
+                            <code class="mt-3 block rounded-md border border-neutral/10 bg-white px-3 py-2 font-mono text-sm text-neutral">git fetch origin feature/ui</code>
+                            <p class="mt-3 text-neutral/70">Télécharge la branche distante sans fusion automatique.</p>
+                        </article>
+                        <article class="rounded-panel border border-neutral/10 bg-neutralSoft p-5 shadow-sm">
+                            <h3 class="text-lg font-semibold text-neutral">Étiqueter une release</h3>
+                            <code class="mt-3 block rounded-md border border-neutral/10 bg-white px-3 py-2 font-mono text-sm text-neutral">git tag v1.0.0</code>
+                            <p class="mt-3 text-neutral/70">Crée un repère pour une version stable. Poussez-le avec <code class="rounded bg-white px-1 py-0.5 font-mono text-xs text-neutral">git push origin --tags</code>.</p>
+                        </article>
+                    </div>
+                </details>
+
+                <details class="group rounded-panel border border-neutral/10 bg-white p-5 shadow-card">
+                    <summary class="flex cursor-pointer items-center justify-between text-lg font-semibold text-neutral transition group-open:text-primary">Diagnostiquer et corriger</summary>
+                    <div class="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+                        <article class="rounded-panel border border-neutral/10 bg-neutralSoft p-5 shadow-sm">
+                            <h3 class="text-lg font-semibold text-neutral">Comparer</h3>
+                            <code class="mt-3 block rounded-md border border-neutral/10 bg-white px-3 py-2 font-mono text-sm text-neutral">git diff main..feature/ui</code>
+                            <p class="mt-3 text-neutral/70">Affiche les différences entre deux branches ou commits.</p>
+                        </article>
+                        <article class="rounded-panel border border-neutral/10 bg-neutralSoft p-5 shadow-sm">
+                            <h3 class="text-lg font-semibold text-neutral">Blâmer</h3>
+                            <code class="mt-3 block rounded-md border border-neutral/10 bg-white px-3 py-2 font-mono text-sm text-neutral">git blame fichier.js</code>
+                            <p class="mt-3 text-neutral/70">Identifie l'auteur et le commit à l'origine de chaque ligne.</p>
+                        </article>
+                        <article class="rounded-panel border border-neutral/10 bg-neutralSoft p-5 shadow-sm">
+                            <h3 class="text-lg font-semibold text-neutral">Trouver un bug</h3>
+                            <code class="mt-3 block rounded-md border border-neutral/10 bg-white px-3 py-2 font-mono text-sm text-neutral">git bisect</code>
+                            <p class="mt-3 text-neutral/70">Automatise la recherche du commit fautif en testant des points intermédiaires.</p>
+                        </article>
+                        <article class="rounded-panel border border-neutral/10 bg-neutralSoft p-5 shadow-sm">
+                            <h3 class="text-lg font-semibold text-neutral">Retrouver un état</h3>
+                            <code class="mt-3 block rounded-md border border-neutral/10 bg-white px-3 py-2 font-mono text-sm text-neutral">git reflog</code>
+                            <p class="mt-3 text-neutral/70">Liste toutes les positions récentes de HEAD pour récupérer un travail perdu.</p>
+                        </article>
+                    </div>
+                </details>
             </div>
         </section>
 
-        <!-- Référence structurée par situations de travail -->
-        <section class="section command-catalog">
-            <div class="section-heading">
-                <h2>Catalogue par situations</h2>
-                <p>Dépliez une section pour découvrir les commandes adaptées à chaque moment du workflow.</p>
-            </div>
-            <div class="command-groups">
-                <details open>
-                    <summary>Démarrer un projet</summary>
-                    <div class="command-list">
-                        <article class="command-card">
-                            <h3>Initialiser</h3>
-                            <code>git init</code>
-                            <p>Crée un nouveau dépôt Git vide dans le dossier courant.</p>
-                        </article>
-                        <article class="command-card">
-                            <h3>Cloner</h3>
-                            <code>git clone &lt;url&gt;</code>
-                            <p>Télécharge un dépôt existant et configure l'origine distante.</p>
-                        </article>
-                        <article class="command-card">
-                            <h3>Ajouter un distant</h3>
-                            <code>git remote add origin &lt;url&gt;</code>
-                            <p>Associe votre dépôt local à un dépôt distant (GitHub, GitLab...).</p>
-                        </article>
-                    </div>
-                </details>
-
-                <details>
-                    <summary>Construire des commits utiles</summary>
-                    <div class="command-list">
-                        <article class="command-card">
-                            <h3>Préparer</h3>
-                            <code>git add &lt;fichier&gt;</code>
-                            <p>Place les modifications dans l'index avant de les enregistrer.</p>
-                        </article>
-                        <article class="command-card">
-                            <h3>Valider</h3>
-                            <code>git commit -m "message"</code>
-                            <p>Enregistre les changements dans l'historique avec un message clair.</p>
-                        </article>
-                        <article class="command-card">
-                            <h3>Corriger</h3>
-                            <code>git commit --amend</code>
-                            <p>Modifie le dernier commit (message ou contenu) sans en créer un nouveau.</p>
-                        </article>
-                        <article class="command-card">
-                            <h3>Mettre de côté</h3>
-                            <code>git stash push -m "note"</code>
-                            <p>Sauvegarde vos modifications en cours pour revenir sur une base propre.</p>
-                        </article>
-                    </div>
-                </details>
-
-                <details>
-                    <summary>Gérer les branches</summary>
-                    <div class="command-list">
-                        <article class="command-card">
-                            <h3>Créer une branche</h3>
-                            <code>git checkout -b feature/ui</code>
-                            <p>Crée et bascule sur une nouvelle branche pour isoler votre travail.</p>
-                        </article>
-                        <article class="command-card">
-                            <h3>Changer de branche</h3>
-                            <code>git switch feature/ui</code>
-                            <p>Basculer vers une branche existante. Alternative moderne à <code>checkout</code>.</p>
-                        </article>
-                        <article class="command-card">
-                            <h3>Fusionner</h3>
-                            <code>git merge feature/ui</code>
-                            <p>Intègre les commits de la branche cible dans la branche courante.</p>
-                        </article>
-                        <article class="command-card">
-                            <h3>Réécrire proprement</h3>
-                            <code>git rebase main</code>
-                            <p>Rejoue vos commits par-dessus la branche principale pour un historique linéaire.</p>
-                        </article>
-                    </div>
-                </details>
-
-                <details>
-                    <summary>Collaborer avec l'équipe</summary>
-                    <div class="command-list">
-                        <article class="command-card">
-                            <h3>Publier</h3>
-                            <code>git push -u origin feature/ui</code>
-                            <p>Envoie vos commits et définit la branche distante par défaut.</p>
-                        </article>
-                        <article class="command-card">
-                            <h3>Mettre à jour</h3>
-                            <code>git pull --rebase</code>
-                            <p>Récupère les nouveautés distantes et réapplique vos commits par-dessus.</p>
-                        </article>
-                        <article class="command-card">
-                            <h3>Suivre une branche distante</h3>
-                            <code>git fetch origin feature/ui</code>
-                            <p>Télécharge la branche distante sans fusion automatique.</p>
-                        </article>
-                        <article class="command-card">
-                            <h3>Étiqueter une release</h3>
-                            <code>git tag v1.0.0</code>
-                            <p>Crée un repère pour une version stable. Poussez-le avec <code>git push origin --tags</code>.</p>
-                        </article>
-                    </div>
-                </details>
-
-                <details>
-                    <summary>Diagnostiquer et corriger</summary>
-                    <div class="command-list">
-                        <article class="command-card">
-                            <h3>Comparer</h3>
-                            <code>git diff main..feature/ui</code>
-                            <p>Affiche les différences entre deux branches ou commits.</p>
-                        </article>
-                        <article class="command-card">
-                            <h3>Blâmer</h3>
-                            <code>git blame fichier.js</code>
-                            <p>Identifie l'auteur et le commit à l'origine de chaque ligne.</p>
-                        </article>
-                        <article class="command-card">
-                            <h3>Trouver un bug</h3>
-                            <code>git bisect</code>
-                            <p>Automatise la recherche du commit fautif en testant des points intermédiaires.</p>
-                        </article>
-                        <article class="command-card">
-                            <h3>Retrouver un état</h3>
-                            <code>git reflog</code>
-                            <p>Liste toutes les positions récentes de HEAD pour récupérer un travail perdu.</p>
-                        </article>
-                    </div>
-                </details>
-            </div>
-        </section>
-
-        <!-- Mémo final avec astuces et rappels rapides -->
-        <section class="section memo">
-            <div class="memo-grid">
-                <article class="memo-card">
-                    <h3>Raccourcis utiles</h3>
-                    <ul>
-                        <li><code>git status -sb</code> pour un état condensé.</li>
-                        <li><code>git log --since="2 weeks"</code> pour filtrer l'historique.</li>
-                        <li><code>git diff --staged</code> avant le commit.</li>
-                        <li><code>git clean -fd</code> pour supprimer les fichiers générés.</li>
-                    </ul>
-                </article>
-                <article class="memo-card accent">
-                    <h3>Workflow distant</h3>
-                    <ol>
-                        <li>Récupérer les mises à jour <code>git fetch</code></li>
-                        <li>Rebaser ou fusionner votre branche</li>
-                        <li>Pousser vos commits <code>git push</code></li>
-                        <li>Ouvrir une pull request et demander une revue</li>
-                    </ol>
-                </article>
-                <article class="memo-card">
-                    <h3>Bonnes pratiques</h3>
-                    <p>Privilégiez des commits de moins de 30 lignes modifiées, catégorisez vos messages (feat, fix, docs) et taguez vos releases stables.</p>
-                </article>
-            </div>
+        <section class="grid gap-6 md:grid-cols-2">
+            <article class="rounded-panel border border-neutral/10 bg-white p-6 shadow-card">
+                <h3 class="text-2xl font-semibold text-neutral">Raccourcis utiles</h3>
+                <ul class="mt-4 space-y-3 text-neutral/70">
+                    <li><code class="rounded bg-neutralSoft px-2 py-1 font-mono text-sm text-neutral">git status -sb</code> pour un état condensé.</li>
+                    <li><code class="rounded bg-neutralSoft px-2 py-1 font-mono text-sm text-neutral">git log --since="2 weeks"</code> pour filtrer l'historique.</li>
+                    <li><code class="rounded bg-neutralSoft px-2 py-1 font-mono text-sm text-neutral">git diff HEAD~1</code> pour comparer rapidement.</li>
+                </ul>
+            </article>
+            <article class="rounded-panel border border-neutral/10 bg-white p-6 shadow-card">
+                <h3 class="text-2xl font-semibold text-neutral">Bonnes pratiques</h3>
+                <ul class="mt-4 space-y-3 text-neutral/70">
+                    <li>Commencez vos messages par un verbe à l'infinitif&nbsp;: <code class="rounded bg-neutralSoft px-2 py-1 font-mono text-sm text-neutral">Ajoute</code>, <code class="rounded bg-neutralSoft px-2 py-1 font-mono text-sm text-neutral">Corrige</code>, <code class="rounded bg-neutralSoft px-2 py-1 font-mono text-sm text-neutral">Supprime</code>.</li>
+                    <li>Préférez des branches courtes et spécifiques à une seule tâche.</li>
+                    <li>Relisez vos commits avant de les pousser pour vérifier cohérence et lisibilité.</li>
+                </ul>
+            </article>
         </section>
     </main>
 
-    <!-- Pied de page avec lien de retour vers l'accueil -->
-    <footer class="site-footer">
-        <p>Besoin d'une piqûre de rappel&nbsp;? <a href="index.html">Retour à l'atelier</a></p>
+    <footer class="border-t border-neutral/10 bg-white py-6 text-center text-sm text-neutral/70">
+        <p>Besoin d'un rappel visuel&nbsp;? <a class="font-semibold text-primary transition hover:text-primaryDark" href="index.html#concepts">Retourner aux concepts clés</a></p>
+        <p class="mt-2"><a class="font-semibold text-primary transition hover:text-primaryDark" href="pingpong/index.html">Faire une pause jeu</a></p>
     </footer>
 </body>
 </html>
